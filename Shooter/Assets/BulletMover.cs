@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BulletMover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float Speed = 100;
+    private Vector3 direction;
+    private void Awake()
     {
-        
+        direction = transform.up;
+        direction.Normalize();
     }
-
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += direction * Time.deltaTime * Speed;
     }
 }
