@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     [SerializeField] float speed = 10;
     [SerializeField] Animator animator;
 
-
     PlayerShooter playerShooter;
     bool isShooting = false;
     Controls inputActions;

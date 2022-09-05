@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 2
-  weaponIdex: 0
   ammo: 10
   <RifflePosition>k__BackingField: {fileID: 8072534817406996634}
   <Bullet>k__BackingField: {fileID: 4996810011105628054, guid: 57eade2cee0a7b549999399bcb0c99e6, type: 3}
@@ -301,7 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 2
-  weaponIdex: 0
   ammo: 10
   <RifflePosition>k__BackingField: {fileID: 8072534817406996634}
   <Bullet>k__BackingField: {fileID: 4996810011105628054, guid: 57eade2cee0a7b549999399bcb0c99e6, type: 3}
@@ -349,7 +347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 2
-  weaponIdex: 1
 --- !u!1 &8072534817097048796
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +358,6 @@ GameObject:
   - component: {fileID: 8072534817097048795}
   - component: {fileID: 8072534817097048794}
   - component: {fileID: 8072534817097048793}
-  - component: {fileID: 8072534817097048792}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -415,22 +411,6 @@ MonoBehaviour:
   - {fileID: 8072534816536778050}
   - {fileID: 8072534816131671261}
   - {fileID: 8072534816428703011}
---- !u!58 &8072534817097048792
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8072534817097048796}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: -0.32}
-  serializedVersion: 2
-  m_Radius: 0.7258643
 --- !u!1 &8072534817238228429
 GameObject:
   m_ObjectHideFlags: 0
