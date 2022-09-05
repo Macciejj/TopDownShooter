@@ -16,4 +16,9 @@ public class BulletMover : MonoBehaviour
     {
         transform.position += direction * Time.deltaTime * Speed;
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

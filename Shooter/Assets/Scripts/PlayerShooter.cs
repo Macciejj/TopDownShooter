@@ -25,7 +25,7 @@ public class PlayerShooter : MonoBehaviour
     {     
         if(isShooting)
         {
-            if (lastShot >= timeBetweenAttacks)
+            if (lastShot >= 1/weapons[currentWeaponIndex].attackSpeed)
             {
                 animator.SetTrigger("Attack");
                 weapons[currentWeaponIndex].Shoot();
