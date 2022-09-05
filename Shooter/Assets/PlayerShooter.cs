@@ -31,8 +31,6 @@ public class PlayerShooter : MonoBehaviour
                 weapons[currentWeaponIndex].Shoot();
                 lastShot = 0;
             }
-            
-            print(lastShot);
         }
         lastShot += Time.deltaTime;
 
