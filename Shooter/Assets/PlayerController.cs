@@ -8,11 +8,17 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 {
     [SerializeField] float speed = 10;
     [SerializeField] Animator animator;
-    [SerializeField] [Range(0, 2)] int weaponType;
-    [SerializeField] Transform rifflePosition;
-    [SerializeField] GameObject bullet;
+
+
+    PlayerShooter playerShooter;
+    bool isShooting = false;
     Controls inputActions;
     Vector2 direction;
+
+    private void Awake()
+    {
+        playerShooter = GetComponent<PlayerShooter>();
+    }
 
     private void OnEnable()
     {
@@ -28,6 +34,12 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     void Update()
     {
         Move();
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+       playerShooter.Shoot(animator, isShooting);
     }
 
     private void Move()
@@ -43,11 +55,13 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
         {
-            animator.SetTrigger("Attack");
-            Quaternion rotation = transform.rotation;
-            Instantiate(bullet, rifflePosition.position, rotation);
+            isShooting = true;
+        }
+        if(context.canceled)
+        {
+            isShooting = false;
         }
         
     }
@@ -62,19 +76,9 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
-        print(context.ReadValue<float>());
-
         if(context.ReadValue<float>() == 0f)
         {
-            if (weaponType >= 2)
-            {
-                weaponType = 0;
-            }
-            else
-            {
-                weaponType++;
-            }
-            animator.SetInteger("WeaponIndex", weaponType);
+            playerShooter.ChangeWeapon(animator);
         }
         
     }
