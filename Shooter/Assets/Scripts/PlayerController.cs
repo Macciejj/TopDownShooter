@@ -30,9 +30,12 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     {
         inputActions.Player.Disable();
     }
-    void Update()
+    private void FixedUpdate()
     {
         Move();
+    }
+    void Update()
+    {
         Shoot();
     }
 
@@ -43,7 +46,8 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     private void Move()
     {
-        transform.position += new Vector3(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x *  speed, direction.y * speed);
+        //transform.position += new Vector3(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0);
     }
 
     public void OnMove(InputAction.CallbackContext context)
