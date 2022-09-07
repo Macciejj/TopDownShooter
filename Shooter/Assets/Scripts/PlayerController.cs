@@ -6,17 +6,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 {
-    [SerializeField] float speed = 10;
     [SerializeField] Animator animator;
 
-    PlayerShooter playerShooter;
-    bool isShooting = false;
-    Controls inputActions;
-    Vector2 direction;
+    private PlayerShooter playerShooter;
+    private bool isShooting = false;
+    private Controls inputActions;
+    private Vector2 direction;
+    private Mover mover;
 
     private void Awake()
     {
         playerShooter = GetComponent<PlayerShooter>();
+        mover = GetComponent<Mover>();
     }
 
     private void OnEnable()
@@ -30,30 +31,20 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     {
         inputActions.Player.Disable();
     }
+
+    private void Update()
+    {
+        playerShooter.Shoot(animator, isShooting);
+    }
+
     private void FixedUpdate()
     {
-        Move();
-    }
-    void Update()
-    {
-        Shoot();
-    }
-
-    private void Shoot()
-    {
-       playerShooter.Shoot(animator, isShooting);
-    }
-
-    private void Move()
-    {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x *  speed, direction.y * speed);
-        //transform.position += new Vector3(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0);
+        mover.Move(direction);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         direction = new Vector2(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y);
-        direction.Normalize();
     }
 
     public void OnShoot(InputAction.CallbackContext context)
