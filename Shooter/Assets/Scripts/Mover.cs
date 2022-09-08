@@ -6,16 +6,16 @@ public class Mover : MonoBehaviour
 {
     [SerializeField]
     private float speed = 10f;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rb;
     private Vector2 direction;
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();      
+        rb = GetComponent<Rigidbody2D>();      
     }
 
     public void Move(Vector2 direction)
     {
         direction.Normalize();
-        rigidbody.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
 }
