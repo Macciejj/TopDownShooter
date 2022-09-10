@@ -18,7 +18,6 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Shoot(Animator animator)
     {
-        print("elo");
         if (lastShot >= 1 / attackSpeed)
         {
             animator.SetTrigger("Attack");

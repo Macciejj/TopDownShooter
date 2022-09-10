@@ -11,10 +11,12 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Weapon weapon;
     [SerializeField] Animator animator;
     NavMeshAgent navMesh;
+    
     private void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
         navMesh.updateUpAxis = false;
+        navMesh.updateRotation = false;
     }
 
     private void Update()
@@ -22,16 +24,30 @@ public class EnemyAI : MonoBehaviour
         if (GetDistanceToPlayer() < shootingRange)
         {
             weapon.Shoot(animator);
-            return;
         }
-        if (GetDistanceToPlayer() < seeingRange)
+        else if (GetDistanceToPlayer() < seeingRange)
         {
+            print(GetDistanceToPlayer());
             SetDestination(player);
         }
     }
+    private void LateUpdate()
+    {
+        //if (navMesh.velocity.sqrMagnitude > Mathf.Epsilon)
+        //{
+            float angle = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Mathf.Infinity * Time.deltaTime);
+
+       // }
+
+    }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, seeingRange);  
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, seeingRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
     private float GetDistanceToPlayer()
     {
