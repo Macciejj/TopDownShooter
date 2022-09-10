@@ -10,22 +10,8 @@ public class WeaponRange : Weapon
 
     public override void Shoot()
     {
-        //if(ammo > 0)
-        //{
         Quaternion rotation = transform.rotation;
         Instantiate(Bullet, RifflePosition.position, rotation);
-        //}
-        //ammo--;
-
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

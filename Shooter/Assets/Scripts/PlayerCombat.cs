@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
-public class PlayerShooter : MonoBehaviour
+public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Weapon[] weapons;
     int currentWeaponIndex = 0;
-    private float timeBetweenAttacks = 1f;
-    float lastShot = 0f;
+    float lastShot = Mathf.Infinity;
+    Stopwatch stopwatch;
+
+    private void Start()
+    {
+        stopwatch = new Stopwatch();
+    }
 
     public void ChangeWeapon(Animator animator)
     {
@@ -23,17 +29,16 @@ public class PlayerShooter : MonoBehaviour
     }
     public void Shoot(Animator animator, bool isShooting)
     {     
-        if(isShooting)
+        if (isShooting)
         {
             if (lastShot >= 1/weapons[currentWeaponIndex].attackSpeed)
             {
                 animator.SetTrigger("Attack");
                 weapons[currentWeaponIndex].Shoot();
-                lastShot = 0;
+                stopwatch.Restart();
             }
-        }
-        lastShot += Time.deltaTime;
+            lastShot = stopwatch.ElapsedMilliseconds / 1000f;
 
+        }    
     }
-
 }

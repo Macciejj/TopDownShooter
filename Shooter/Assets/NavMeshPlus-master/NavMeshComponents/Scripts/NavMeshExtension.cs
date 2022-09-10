@@ -44,7 +44,7 @@ namespace NavMeshComponents.Extensions
         protected virtual void ConnectToVcam(bool connect)
         {
             if (connect && NavMeshSurfaceOwner == null)
-                Debug.LogError("NevMeshExtension requires a NavMeshSurface component");
+                //Debug.LogError("NevMeshExtension requires a NavMeshSurface component");
             if (NavMeshSurfaceOwner != null)
             {
                 if (connect)

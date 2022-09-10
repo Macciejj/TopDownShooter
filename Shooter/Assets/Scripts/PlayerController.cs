@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 {
     [SerializeField] Animator animator;
 
-    private PlayerShooter playerShooter;
+    private PlayerCombat playerShooter;
     private bool isShooting = false;
     private Controls inputActions;
     private Vector2 direction;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     private void Awake()
     {
-        playerShooter = GetComponent<PlayerShooter>();
+        playerShooter = GetComponent<PlayerCombat>();
         mover = GetComponent<Mover>();
     }
 

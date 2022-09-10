@@ -6,4 +6,5 @@ public abstract class Weapon : MonoBehaviour
 {
     public float attackSpeed;
     public abstract void Shoot();
+    private bool canShoot = true;
 }
