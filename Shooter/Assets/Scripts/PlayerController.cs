@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 {
-    [SerializeField] Animator animator;
-
     private PlayerCombat playerShooter;
     private bool isShooting = false;
     private Controls inputActions;
@@ -34,7 +32,7 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     private void Update()
     {
-        playerShooter.Shoot(animator, isShooting);
+        playerShooter.TriggerWeapon(isShooting);
     }
 
     private void FixedUpdate()
@@ -56,23 +54,19 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
         if(context.canceled)
         {
             isShooting = false;
-        }
-        
+        }       
     }
 
     public void OnTurn(InputAction.CallbackContext context)
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
-        Vector2 direction = mousePosition - transform.position;
-        direction.Normalize();
-        transform.up = direction;
+        mover.Turn(context.ReadValue<Vector2>());
     }
 
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
         if(context.ReadValue<float>() == 0f)
         {
-            playerShooter.ChangeWeapon(animator);
+            playerShooter.ChangeWeapon();
         }
         
     }

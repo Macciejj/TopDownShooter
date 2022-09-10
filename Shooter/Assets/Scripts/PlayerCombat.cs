@@ -6,16 +6,11 @@ using System.Diagnostics;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Weapon[] weapons;
-    int currentWeaponIndex = 0;
-    float lastShot = Mathf.Infinity;
-    Stopwatch stopwatch;
+    [SerializeField] Animator animator;
+    private int currentWeaponIndex = 0;
 
-    private void Start()
-    {
-        stopwatch = new Stopwatch();
-    }
 
-    public void ChangeWeapon(Animator animator)
+    public void ChangeWeapon()
     {
         if (currentWeaponIndex >= 2)
         {
@@ -27,17 +22,11 @@ public class PlayerCombat : MonoBehaviour
         }
         animator.SetInteger("WeaponIndex", currentWeaponIndex);
     }
-    public void Shoot(Animator animator, bool isShooting)
+    public void TriggerWeapon(bool isShooting)
     {     
         if (isShooting)
         {
-            if (lastShot >= 1/weapons[currentWeaponIndex].attackSpeed)
-            {
-                animator.SetTrigger("Attack");
-                weapons[currentWeaponIndex].Shoot();
-                stopwatch.Restart();
-            }
-            lastShot = stopwatch.ElapsedMilliseconds / 1000f;
+            weapons[currentWeaponIndex].Shoot(animator);
 
         }    
     }

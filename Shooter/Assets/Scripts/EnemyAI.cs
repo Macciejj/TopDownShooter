@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float shootingRange = 4;
     [SerializeField] GameObject player;
     [SerializeField] Weapon weapon;
+    [SerializeField] Animator animator;
     NavMeshAgent navMesh;
     private void Start()
     {
@@ -20,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (GetDistanceToPlayer() < shootingRange)
         {
-            weapon.Shoot();
+            weapon.Shoot(animator);
             return;
         }
         if (GetDistanceToPlayer() < seeingRange)

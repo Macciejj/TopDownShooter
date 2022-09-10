@@ -769,6 +769,7 @@ MonoBehaviour:
   shootingRange: 4
   player: {fileID: 8072534815637988439}
   weapon: {fileID: 1472161074}
+  animator: {fileID: 93143878}
 --- !u!114 &1716073197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,6 +1114,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6755916960385058367, guid: 3a76910be9a5e0e48b994f55976a4a32, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8072534816696785691}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a76910be9a5e0e48b994f55976a4a32, type: 3}
 --- !u!4 &3298518439254729326 stripped
@@ -1189,5 +1194,10 @@ Transform:
 --- !u!1 &8072534815637988439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6755916960385058362, guid: 3a76910be9a5e0e48b994f55976a4a32, type: 3}
+  m_PrefabInstance: {fileID: 3298518439254729325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8072534816696785691 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6755916959297436022, guid: 3a76910be9a5e0e48b994f55976a4a32, type: 3}
   m_PrefabInstance: {fileID: 3298518439254729325}
   m_PrefabAsset: {fileID: 0}
