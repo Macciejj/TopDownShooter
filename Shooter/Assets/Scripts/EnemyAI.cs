@@ -10,8 +10,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Weapon weapon;
     [SerializeField] Animator animator;
+    [SerializeField] Transform playerTranform;
+    [SerializeField] LayerMask layerMask;
     NavMeshAgent navMesh;
-    
+    bool haveSeenPlayer = false;
+    RaycastHit2D[] walls;
+
+
     private void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
@@ -21,27 +26,38 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        walls = Physics2D.RaycastAll(transform.position, GetDirectionToPlayer(), GetDistanceToPlayer(), layerMask);
+        Debug.DrawRay(transform.position, GetDirectionToPlayer() * GetDistanceToPlayer(), Color.red);
+
+        if (!haveSeenPlayer)
+        {
+            haveSeenPlayer = !walls.Any() && GetDistanceToPlayer() < seeingRange;
+            return;
+        }
+
         if (GetDistanceToPlayer() < shootingRange)
         {
-            weapon.Shoot(animator);
+            if (!walls.Any())
+            {
+                weapon.Shoot(animator);
+            }
         }
-        else if (GetDistanceToPlayer() < seeingRange)
-        {
-            print(GetDistanceToPlayer());
-            SetDestination(player);
-        }
+
+        SetDestination(player);
     }
+
     private void LateUpdate()
     {
         //if (navMesh.velocity.sqrMagnitude > Mathf.Epsilon)
         //{
+        if (haveSeenPlayer)
+        {
             float angle = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Mathf.Infinity * Time.deltaTime);
-
-       // }
-
+        }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -49,10 +65,20 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
+
+
     private float GetDistanceToPlayer()
     {
         return Vector2.Distance(transform.position, player.transform.position);
     }
+
+    private Vector2 GetDirectionToPlayer()
+    {
+        Vector2 direction = playerTranform.position - transform.position;
+        direction.Normalize();
+        return direction;
+    }
+
     void SetDestination(GameObject target)
     {
         var agentDrift = 0.0001f; // minimal
