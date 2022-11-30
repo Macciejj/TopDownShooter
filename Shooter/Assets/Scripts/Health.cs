@@ -7,8 +7,21 @@ public class Health : MonoBehaviour, IDamageable
 {
 
     [SerializeField] [Range(0,100)] int health = 100;
-    int maxhealth;
     [SerializeField] Image healthBar;
+
+    private int maxhealth;
+
+    void Start()
+    {
+        maxhealth = health;
+    }
+
+    void Update()
+    {
+        if (healthBar == null) return;
+        healthBar.fillAmount = (float)health / (float)maxhealth;
+    }
+
     private void Die()
     {
         Destroy(gameObject);
@@ -24,16 +37,5 @@ public class Health : MonoBehaviour, IDamageable
         }
         health -= damage;
         Debug.Log(health);
-    }
-
-    void Start()
-    {
-        maxhealth = health;   
-    }
-
-    void Update()
-    {
-        if (healthBar == null) return;
-        healthBar.fillAmount = (float)health / (float)maxhealth;
     }
 }

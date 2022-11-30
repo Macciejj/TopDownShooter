@@ -9,8 +9,6 @@ public class WeaponRange : Weapon
     [field: SerializeField] public Transform RifflePosition { get; private set; }
     [field: SerializeField] public GameObject Bullet { get; private set; }
 
-    
-
     public override void Shoot(Animator animator)
     {
         PerformShooting = CreateBullet;
