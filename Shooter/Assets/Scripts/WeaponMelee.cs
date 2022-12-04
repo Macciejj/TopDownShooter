@@ -8,9 +8,20 @@ public class WeaponMelee : Weapon
     [SerializeField] float range;
     [SerializeField] Transform rangeStartPoint;
     [SerializeField] LayerMask targetMask;
-    public override void Shoot(Animator animator)
+
+    protected override void Start()
     {
         PerformShooting = DealDamageToEnemy;
+        base.Start();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(rangeStartPoint.position, range);
+    }
+
+    public override void Shoot(Animator animator)
+    {
         base.Shoot(animator);
     }
 
@@ -22,10 +33,5 @@ public class WeaponMelee : Weapon
         {
             enemy.TakeDamage(damage);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(rangeStartPoint.position, range);
-    }
+    } 
 }

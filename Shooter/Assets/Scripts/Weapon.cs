@@ -8,25 +8,16 @@ public abstract class Weapon : MonoBehaviour
 {
     [field: SerializeField] public float AttackSpeed { get; protected set; }
     protected Action PerformShooting;
-    private float lastShot = Mathf.Infinity;
-    private Stopwatch stopwatch;
+    private RateOfFireLimiter rateOfFireLimiter;
 
-    private void Start()
+    protected virtual void Start()
     {
-        stopwatch = new Stopwatch();
+        rateOfFireLimiter = new RateOfFireLimiter(AttackSpeed, PerformShooting);
     }
 
     public virtual void Shoot(Animator animator)
     {
-        if (lastShot >= 1 / AttackSpeed)
-        {
-            AudioManager.instance.Play("RiffleShot");
-            animator.SetTrigger("Attack");
-            PerformShooting?.Invoke();
-            stopwatch.Restart();
-
-        }
-        lastShot = stopwatch.ElapsedMilliseconds / 1000f;
+        rateOfFireLimiter.LimitRateOfFire(animator);
     }
 
 }

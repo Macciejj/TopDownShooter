@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void ChangeWeapon()
     {
-        if (currentWeaponIndex >= 2)
+        if (currentWeaponIndex > weapons.Length)
         {
             currentWeaponIndex = 0;
         }
