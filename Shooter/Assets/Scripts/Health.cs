@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable
 {
 
     [SerializeField] [Range(0,100)] int health = 100;
+
     [SerializeField] Image healthBar;
+
+    [SerializeField] ParticleSystem explosionParticleSystem;
 
     private int maxhealth;
 
@@ -24,18 +28,23 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Destroy(gameObject);
+        if(explosionParticleSystem!=null) Instantiate(explosionParticleSystem, transform.position, transform.rotation);
+        Behaviour[] behaviours = gameObject.GetComponentsInChildren<Behaviour>();
+        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        foreach (var item in behaviours)
+        {
+            if(item!=this) item.enabled = false;
+        }
+        Destroy(gameObject, 2);
     }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log(health);
         if (health-damage<=0)
         {
             Die();
             return;
         }
         health -= damage;
-        Debug.Log(health);
     }
 }

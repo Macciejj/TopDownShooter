@@ -27,11 +27,12 @@ public class WeaponMelee : Weapon
 
     private void DealDamageToEnemy()
     {
-        if (Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask) == null) return;
-        Health enemy = Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask).GetComponent<Health>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        AreaOfEffectDamageDealer.DealAreaOfEffectDamage(rangeStartPoint.position, range, targetMask, damage);
+        //if (Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask) == null) return;
+        //Health enemy = Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask).GetComponent<Health>();
+        //if (enemy != null)
+        //{
+        //    enemy.TakeDamage(damage);
+        //}
     } 
 }
