@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (!walls.Any())
             {
-                weapon.Shoot(animator);
+                weapon.Attack(animator);
             }
         }
 

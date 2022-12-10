@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
-        if(context.ReadValue<float>() == 0f)
+        if(context.ReadValue<Vector2>() == Vector2.zero)
         {
             playerShooter.ChangeWeapon();
         }

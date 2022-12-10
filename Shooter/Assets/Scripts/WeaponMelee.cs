@@ -9,10 +9,9 @@ public class WeaponMelee : Weapon
     [SerializeField] Transform rangeStartPoint;
     [SerializeField] LayerMask targetMask;
 
-    protected override void Start()
+    private void Start()
     {
-        PerformShooting = DealDamageToEnemy;
-        base.Start();
+        PerformAttacking = DealDamageToEnemy;
     }
 
     private void OnDrawGizmos()
@@ -20,19 +19,13 @@ public class WeaponMelee : Weapon
         Gizmos.DrawWireSphere(rangeStartPoint.position, range);
     }
 
-    public override void Shoot(Animator animator)
+    public override void Attack(Animator animator)
     {
-        base.Shoot(animator);
+        base.Attack(animator);
     }
 
     private void DealDamageToEnemy()
     {
         AreaOfEffectDamageDealer.DealAreaOfEffectDamage(rangeStartPoint.position, range, targetMask, damage);
-        //if (Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask) == null) return;
-        //Health enemy = Physics2D.OverlapCircle(rangeStartPoint.position, range, targetMask).GetComponent<Health>();
-        //if (enemy != null)
-        //{
-        //    enemy.TakeDamage(damage);
-        //}
-    } 
+    }
 }

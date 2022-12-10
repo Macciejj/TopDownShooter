@@ -5,10 +5,8 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Granade : WeaponRange
 {
-    [SerializeField] float TimeToDetonation;
-    [SerializeField] float TimeToDestroy = 1f;
+    [SerializeField] float TimeToDetonation = 1f;
     [SerializeField] ParticleSystem ExplosionParticles;
-    [SerializeField] Light2D explosionLight;
     [SerializeField] float explosionRadius = 1;
     [SerializeField] int damage;
     [SerializeField] LayerMask layerMask;

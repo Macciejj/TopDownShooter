@@ -3,21 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Weapon : MonoBehaviour
 {
     [field: SerializeField] public float AttackSpeed { get; protected set; }
-    protected Action PerformShooting;
-    private RateOfFireLimiter rateOfFireLimiter;
+    [field: SerializeField] public string SoundName { get; protected set; }
+    protected float lastAttack = Mathf.Infinity;
+    private bool canAttack = true;
+    protected Action PerformAttacking;
 
-    protected virtual void Start()
+    private void Update()
     {
-        rateOfFireLimiter = new RateOfFireLimiter(AttackSpeed, PerformShooting);
+        CheckRateOfFire();
     }
 
-    public virtual void Shoot(Animator animator)
+    private void CheckRateOfFire()
     {
-        rateOfFireLimiter.LimitRateOfFire(animator);
+        if (lastAttack >= 1 / AttackSpeed)
+        {
+            canAttack = true;
+            lastAttack = 0;
+        }
+        lastAttack += Time.deltaTime;
+    }
+
+    public virtual void Attack(Animator animator)
+    {
+        if (canAttack)
+        {
+            canAttack = false;
+            animator.SetBool("Attack", true);
+            AudioManager.instance.Play(SoundName);
+            this.PerformAttacking?.Invoke();
+        }
     }
 
 }

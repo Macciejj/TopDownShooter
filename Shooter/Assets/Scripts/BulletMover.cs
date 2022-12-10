@@ -20,9 +20,9 @@ public class BulletMover : MonoBehaviour
         rb.velocity = transform.up * Speed;
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        Destroy(gameObject);
     }
 
     private void OnBecameInvisible()

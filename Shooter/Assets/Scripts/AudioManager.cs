@@ -22,6 +22,9 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string clipName)
     {
-        sounds.First(sound => sound.soundName == clipName)?.audioSource.Play();
+        if (sounds == null) return;
+        Sound sound = sounds.FirstOrDefault(sound => sound.soundName == clipName);
+        if (sound == null) return;
+        sound.audioSource.Play();
     }
 }
