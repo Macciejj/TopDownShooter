@@ -17,15 +17,29 @@ public class PlayerCombat : MonoBehaviour
         OnAmmoAndBulletsChanged(weapons[currentWeaponIndex]);
     }
 
-    public void ChangeWeapon()
+    public void ChangeWeaponUp()
     {
-        if (currentWeaponIndex >= weapons.Length - 1)
+        if (currentWeaponIndex + 1 >= weapons.Length)
         {
-            currentWeaponIndex = 0;
+            return;
         }
         else
         {
             currentWeaponIndex++;
+        }
+        animator.SetInteger("WeaponIndex", currentWeaponIndex);
+        OnAmmoAndBulletsChanged(weapons[currentWeaponIndex]);
+    }
+
+    public void ChangeWeaponDown()
+    {
+        if (currentWeaponIndex <= 0)
+        {
+            return;
+        }
+        else
+        {
+            currentWeaponIndex--;
         }
         animator.SetInteger("WeaponIndex", currentWeaponIndex);
         OnAmmoAndBulletsChanged(weapons[currentWeaponIndex]);

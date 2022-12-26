@@ -49,6 +49,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangeWeapon_"",
+                    ""type"": ""Value"",
+                    ""id"": ""ee299453-0b67-4bba-b03e-dfdd5543a403"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,50 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bb2dca1-c7b1-4af6-8940-43e266b30e65"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard&Mouse"",
+                    ""action"": ""ChangeWeapon_"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00379d05-dee6-4313-8c18-0fd7b59f335b"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard&Mouse"",
+                    ""action"": ""ChangeWeapon_"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da70051b-59f5-46cc-a8fa-1ad781c69966"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard&Mouse"",
+                    ""action"": ""ChangeWeapon_"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4940c76-fea7-4359-baee-44827e5a6f46"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kayboard&Mouse"",
+                    ""action"": ""ChangeWeapon_"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +220,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_Player_ChangeWeapon_ = m_Player.FindAction("ChangeWeapon_", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,6 +274,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Turn;
     private readonly InputAction m_Player_ChangeWeapon;
+    private readonly InputAction m_Player_ChangeWeapon_;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -229,6 +283,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Turn => m_Wrapper.m_Player_Turn;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
+        public InputAction @ChangeWeapon_ => m_Wrapper.m_Player_ChangeWeapon_;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +305,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ChangeWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
                 @ChangeWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
                 @ChangeWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon_.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon_;
+                @ChangeWeapon_.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon_;
+                @ChangeWeapon_.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon_;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +324,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ChangeWeapon.started += instance.OnChangeWeapon;
                 @ChangeWeapon.performed += instance.OnChangeWeapon;
                 @ChangeWeapon.canceled += instance.OnChangeWeapon;
+                @ChangeWeapon_.started += instance.OnChangeWeapon_;
+                @ChangeWeapon_.performed += instance.OnChangeWeapon_;
+                @ChangeWeapon_.canceled += instance.OnChangeWeapon_;
             }
         }
     }
@@ -285,5 +346,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnChangeWeapon_(InputAction.CallbackContext context);
     }
 }

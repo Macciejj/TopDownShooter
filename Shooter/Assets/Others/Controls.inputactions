@@ -36,6 +36,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ChangeWeapon_",
+                    "type": "Value",
+                    "id": "ee299453-0b67-4bba-b03e-dfdd5543a403",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +132,50 @@
                     "processors": "",
                     "groups": "Kayboard&Mouse",
                     "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bb2dca1-c7b1-4af6-8940-43e266b30e65",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard&Mouse",
+                    "action": "ChangeWeapon_",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00379d05-dee6-4313-8c18-0fd7b59f335b",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard&Mouse",
+                    "action": "ChangeWeapon_",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da70051b-59f5-46cc-a8fa-1ad781c69966",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard&Mouse",
+                    "action": "ChangeWeapon_",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4940c76-fea7-4359-baee-44827e5a6f46",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kayboard&Mouse",
+                    "action": "ChangeWeapon_",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

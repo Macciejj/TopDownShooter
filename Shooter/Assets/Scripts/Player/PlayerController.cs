@@ -64,10 +64,20 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
-        if(context.ReadValue<Vector2>() == Vector2.zero)
+        float scrollValue = context.ReadValue<Vector2>().y;
+        if (scrollValue > 0)
         {
-            playerShooter.ChangeWeapon();
+            playerShooter.ChangeWeaponUp();
         }
+        else if(scrollValue < 0)
+        {
+            playerShooter.ChangeWeaponDown();
+        }
+        
+    }
+
+    public void OnChangeWeapon_(InputAction.CallbackContext context)
+    {
         
     }
 }
