@@ -12,9 +12,14 @@ public class PlayerCombat : MonoBehaviour
     private int currentWeaponIndex = 0;
     public event Action<Weapon> AmmoAndBulletsChanged;
 
-    private void Start()
+    private void Awake()
     {
         OnAmmoAndBulletsChanged(weapons[currentWeaponIndex]);
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void ChangeWeaponUp()
